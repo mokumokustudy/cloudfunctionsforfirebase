@@ -12,7 +12,13 @@ export const onBostonWeatherUpdate = functions.firestore.document('citi-weather/
 			conditions: after.conditions
 		}		
 	}
-	return admin.messaging().sendToTopic("weather_boston-ma-us", payload)
+    return admin.messaging().sendToTopic("weather_boston-ma-us", payload)
+    .then(function(response) {
+        console.log("Successfully sent message:", response)
+      })
+      .catch(function(error) {
+        console.log("Error sending message:", error)
+      });
 });
 
 export const getBostonWeather = functions.https.onRequest((request, response) => {

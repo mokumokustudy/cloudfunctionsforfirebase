@@ -12,6 +12,12 @@ functions.firestore.document('cities-weather/boston-ma-us').onUpdate(change => {
         }
     }
     return admin.messaging().sendToTopic("wether_boston-ma-us", payload)
+    .then(response => {
+        console.log('FCM successful:', response)
+    })
+    .catch(error => {
+        console.log('FCM faild:', error)
+    })
 })
 
 export const getBostonAreaWeather = 
